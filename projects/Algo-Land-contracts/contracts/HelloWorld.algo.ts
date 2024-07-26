@@ -1,33 +1,23 @@
 import { Contract } from '@algorandfoundation/tealscript';
+import * as algokit from '@algorandfoundation/algokit-utils'
+import { concat } from 'algosdk';
 
 export class Land extends Contract {
-  userID = GlobalStateKey<uint64>();
+  landReferenceAndTitleDeed = GlobalStateKey<string>();
 
-  landID = GlobalStateKey<uint64>();
+  registerLand(landReferenceAndTitleDeed: string): void {
+    // Get the current value from the global state
+    const currentValue = this.landReferenceAndTitleDeed.value || '';
 
-  titleDeedID = GlobalStateKey<uint64>();
+    // Concatenate the current value with the new value
+    const newValue = currentValue + landReferenceAndTitleDeed;
 
-  setKey(value: uint64): void {
-    this.landID.value = value; // On chain: landID now contains value
+    // Set the new concatenated value back to the global state
+    this.landReferenceAndTitleDeed.value = newValue;
   }
 
-  registerLand(userID: uint64, landID: uint64, titleDeedID: uint64): string {
-    this.userID.value = userID;
-    this.landID.value = landID;
-    this.titleDeedID.value = titleDeedID;
-
-    return 'Registration Successful';
-  }
-
-  verifyLand(landID: uint64): string {
-    // Read the details from the global state
-    const existingUserID = Global.readAppVar(`${landID}-userID`);
-    const existingTitleDeedID = Global.readAppVar(`${landID}-titleDeedID`);
-
-    if (existingUserID !== undefined && existingTitleDeedID !== undefined) {
-      return `LandID: ${landID}, UserID: ${existingUserID}, TitleDeedID: ${existingTitleDeedID}`;
-    } else {
-      return 'Land ID does not exist';
-    }
+  getLand(): string {
+    // Get the current value from the global state
+    return this.landReferenceAndTitleDeed.value || '';
   }
 }

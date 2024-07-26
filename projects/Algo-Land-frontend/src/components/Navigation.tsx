@@ -1,16 +1,19 @@
 import React from 'react'
+import { useWallet } from '@txnlab/use-wallet'
 
 export default function Navigation () {
   return (
-    <div style={{display: "flex", justifyContent: "space-between", borderBottom: "solid 1px"}}>
-        <h2 style={{marginLeft: "50px"}}>Algo-Land</h2>
-        <ul>
-            <a style={{paddingRight: "25px"}}>Log in</a>
-            <a style={{paddingRight: "25px"}}>Sign up</a>
-            <a>
-              <button  style={{height: "50px", width: "150px", backgroundColor: "black", borderRadius: "8px", color: "white", fontWeight: "bold", marginRight: "50px"}}>Connect Wallet</button>
-            </a>
-        </ul>
+    <div style={{ padding: '20px 0', display: 'flex', justifyContent: 'center' }}>
+      <nav style={{  display: 'flex', gap: '20px', border: 'solid, 1px, gray', padding: '10px', borderRadius: '5px' }}>
+        <button style={{ backgroundColor: '#7878ec', borderRadius: '10px', padding: '10px 20px', border: 'none', color: 'white', fontWeight: 'bold' }}>
+           About
+        </button>
+        <button style={{ backgroundColor: 'white', padding: '10px 20px', border: 'none', fontWeight: 'bold' }}>Log In</button>
+        <button style={{ backgroundColor: 'white', padding: '10px 20px', border: 'none', fontWeight: 'bold' }}>Sign Up</button>
+        <button style={{ backgroundColor: 'black', borderRadius: '10px', padding: '10px 20px', border: 'none', color: 'white', fontWeight: 'bold' }}>
+          Connect Wallet
+        </button>
+      </nav>
     </div>
-  )
+  );
 }

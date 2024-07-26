@@ -14,7 +14,7 @@ import Footer from './components/Footer'
 
 let providersArray: ProvidersArray
 if (import.meta.env.VITE_ALGOD_NETWORK === '') {
-  
+
   const kmdConfig = getKmdConfigFromViteEnvironment()
 
   providersArray = [
