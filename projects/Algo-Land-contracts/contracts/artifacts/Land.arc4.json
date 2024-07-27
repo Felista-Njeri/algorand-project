@@ -3,13 +3,8 @@
   "desc": "",
   "methods": [
     {
-      "name": "setKey",
-      "args": [
-        {
-          "name": "value",
-          "type": "uint64"
-        }
-      ],
+      "name": "createApplication",
+      "args": [],
       "returns": {
         "type": "void"
       }
@@ -18,16 +13,8 @@
       "name": "registerLand",
       "args": [
         {
-          "name": "userID",
-          "type": "uint64"
-        },
-        {
-          "name": "landID",
-          "type": "uint64"
-        },
-        {
-          "name": "titleDeedID",
-          "type": "uint64"
+          "name": "landReferenceAndTitleDeed",
+          "type": "string"
         }
       ],
       "returns": {
@@ -35,10 +22,10 @@
       }
     },
     {
-      "name": "createApplication",
+      "name": "getLand",
       "args": [],
       "returns": {
-        "type": "void"
+        "type": "string"
       }
     }
   ]

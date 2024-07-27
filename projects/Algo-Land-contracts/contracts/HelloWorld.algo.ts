@@ -1,13 +1,15 @@
 import { Contract } from '@algorandfoundation/tealscript';
-import * as algokit from '@algorandfoundation/algokit-utils'
-import { concat } from 'algosdk';
 
 export class Land extends Contract {
   landReferenceAndTitleDeed = GlobalStateKey<string>();
 
+  createApplication(): void {
+    this.landReferenceAndTitleDeed.value = '';
+  }
+
   registerLand(landReferenceAndTitleDeed: string): void {
     // Get the current value from the global state
-    const currentValue = this.landReferenceAndTitleDeed.value || '';
+    const currentValue = this.landReferenceAndTitleDeed.value;
 
     // Concatenate the current value with the new value
     const newValue = currentValue + landReferenceAndTitleDeed;
@@ -18,6 +20,6 @@ export class Land extends Contract {
 
   getLand(): string {
     // Get the current value from the global state
-    return this.landReferenceAndTitleDeed.value || '';
+    return this.landReferenceAndTitleDeed.value;
   }
 }

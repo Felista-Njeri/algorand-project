@@ -22,73 +22,98 @@ switch *call_NoOp *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEM
 	// The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?
 	err
 
-// setKey(uint64)void
-*abi_route_setKey:
-	// value: uint64
-	txna ApplicationArgs 1
-	btoi
-
-	// execute setKey(uint64)void
-	callsub setKey
+// createApplication()void
+*abi_route_createApplication:
+	// execute createApplication()void
+	callsub createApplication
 	int 1
 	return
 
-// setKey(value: uint64): void
-setKey:
-	proto 1 0
+// createApplication(): void
+createApplication:
+	proto 0 0
 
-	// contracts\HelloWorld.algo.ts:11
-	// this.landID.value = value
-	byte 0x6c616e644944 // "landID"
-	frame_dig -1 // value: uint64
+	// contracts\HelloWorld.algo.ts:7
+	// this.landReferenceAndTitleDeed.value = ''
+	byte 0x6c616e645265666572656e6365416e645469746c6544656564 // "landReferenceAndTitleDeed"
+	byte 0x0000
 	app_global_put
 	retsub
 
-// registerLand(uint64,uint64,uint64)void
+// registerLand(string)void
 *abi_route_registerLand:
-	// titleDeedID: uint64
-	txna ApplicationArgs 3
-	btoi
-
-	// landID: uint64
-	txna ApplicationArgs 2
-	btoi
-
-	// userID: uint64
+	// landReferenceAndTitleDeed: string
 	txna ApplicationArgs 1
-	btoi
+	extract 2 0
 
-	// execute registerLand(uint64,uint64,uint64)void
+	// execute registerLand(string)void
 	callsub registerLand
 	int 1
 	return
 
-// registerLand(userID: uint64, landID: uint64, titleDeedID: uint64): void
+// registerLand(landReferenceAndTitleDeed: string): void
 registerLand:
-	proto 3 0
+	proto 1 0
+
+	// Push empty bytes after the frame pointer to reserve space for local variables
+	byte 0x
+	dup
+
+	// contracts\HelloWorld.algo.ts:12
+	// currentValue = this.landReferenceAndTitleDeed.value
+	byte 0x6c616e645265666572656e6365416e645469746c6544656564 // "landReferenceAndTitleDeed"
+	app_global_get
+	extract 2 0
+	frame_bury 0 // currentValue: string
 
 	// contracts\HelloWorld.algo.ts:15
-	// this.userID.value = userID
-	byte 0x757365724944 // "userID"
-	frame_dig -1 // userID: uint64
-	app_global_put
+	// newValue = currentValue + landReferenceAndTitleDeed
+	frame_dig 0 // currentValue: string
+	frame_dig -1 // landReferenceAndTitleDeed: string
+	concat
+	frame_bury 1 // newValue: byte[]
 
-	// contracts\HelloWorld.algo.ts:16
-	// this.landID.value = landID
-	byte 0x6c616e644944 // "landID"
-	frame_dig -2 // landID: uint64
-	app_global_put
-
-	// contracts\HelloWorld.algo.ts:17
-	// this.titleDeedID.value = titleDeedID
-	byte 0x7469746c65446565644944 // "titleDeedID"
-	frame_dig -3 // titleDeedID: uint64
+	// contracts\HelloWorld.algo.ts:18
+	// this.landReferenceAndTitleDeed.value = newValue
+	byte 0x6c616e645265666572656e6365416e645469746c6544656564 // "landReferenceAndTitleDeed"
+	frame_dig 1 // newValue: byte[]
+	dup
+	len
+	itob
+	extract 6 2
+	swap
+	concat
 	app_global_put
 	retsub
 
-*abi_route_createApplication:
+// getLand()string
+*abi_route_getLand:
+	// The ABI return prefix
+	byte 0x151f7c75
+
+	// execute getLand()string
+	callsub getLand
+	dup
+	len
+	itob
+	extract 6 2
+	swap
+	concat
+	concat
+	log
 	int 1
 	return
+
+// getLand(): string
+getLand:
+	proto 0 1
+
+	// contracts\HelloWorld.algo.ts:23
+	// return this.landReferenceAndTitleDeed.value;
+	byte 0x6c616e645265666572656e6365416e645469746c6544656564 // "landReferenceAndTitleDeed"
+	app_global_get
+	extract 2 0
+	retsub
 
 *create_NoOp:
 	method "createApplication()void"
@@ -99,10 +124,10 @@ registerLand:
 	err
 
 *call_NoOp:
-	method "setKey(uint64)void"
-	method "registerLand(uint64,uint64,uint64)void"
+	method "registerLand(string)void"
+	method "getLand()string"
 	txna ApplicationArgs 0
-	match *abi_route_setKey *abi_route_registerLand
+	match *abi_route_registerLand *abi_route_getLand
 
 	// this contract does not implement the given ABI method for call NoOp
 	err

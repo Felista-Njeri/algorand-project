@@ -1,6 +1,5 @@
 import React from 'react'
 import avatar from '../assets/avatar.png'
-import { FaCheck } from "react-icons/fa";
 
 export default function LandingPage () {
   return (

@@ -57,7 +57,6 @@ export default function App() {
   return (
     <SnackbarProvider maxSnack={3}>
       <WalletProvider value={walletProviders}>
-        <Home />
         <Navigation />
         <LandingPage />
         <LandRegistration />
