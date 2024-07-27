@@ -2,89 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import * as algokit from '@algorandfoundation/algokit-utils'
 import { getAlgodConfigFromViteEnvironment, getIndexerConfigFromViteEnvironment } from '../utils/network/getAlgoClientConfigs'
-import algosdk from 'algosdk';
-import { ClientManager } from '@algorandfoundation/algokit-utils/types/client-manager';
-import { ApplicationClient } from '@algorandfoundation/algokit-utils/types/app-client'
 
 
 export default function LandRegistration () {
-  const [userID, setUserID] = useState<string>('');
-  const [landID, setLandID] = useState<string>('');
-  const [titleDeedID, setTitleDeedID] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-
-  const submitForm = async (event: React.FormEvent) => {
-    event.preventDefault();
-
- //   try {
-
-
-//       const getSender = algokit.getSenderAddress(sender);
-//       console.log(getSender);
-//       algokit.mnemonicAccountFromEnvironment(account, algod, kmd?)
-//       algokit.mnemonicAccount(mnemonicSecret)
-//       new AlgoAmount({microAlgos: 10_000})
-//       algokit.getAppClient(appDetails, algod)
-//       new ApplicationClient(appDetails, algod)
-//       getGlobalState()
-//       algokit.getAppGlobalState(appId, algod)
-//       algokit.getAppLocalState(appId, algod, account)
-//       algokit.getConfigFromEnvOrDefaults()
-//       algokit.getAlgodConfigFromEnvironment()
-//       algokit.getIndexerConfigFromEnvironment()
-//       algokit.getAlgoNodeConfig(network, config)
-//       algokit.getAlgoClient(config)
-//       algokit.getAlgoKmdClient(config)
-//       algokit.getAlgoIndexerClient(config)
-//       const response = await client.fund('receiver_address', 1000)
-//       // Using constructor argument
-// const client = algokit.getTestNetDispenserApiClient({ authToken: 'your_auth_token' })
-
-// // Using environment variable
-// process.env['ALGOKIT_DISPENSER_ACCESS_TOKEN'] = 'your_auth_token'
-// const client = algokit.getTestNetDispenserApiClient()
-//       algokit.lookupTransactionById(transactionId, indexer)
-//       algokit.lookupAccountCreatedApplicationByAddress(indexer, address, getAll?, paginationLimit?)
-//       algokit.getTransactionParams(params, algod)
-//       algokit.controlFees(transaction, feeControl)
-//       algokit.signTransaction(transaction, signer)
-      // Algorand client setup
-    //   const algodToken = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; // Replace with your API key
-    //   const algodServer = 'https://localhost';
-    //   const algodPort = '4001';
-    //   const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
-
-    //   // Transaction parameters
-    //   const params = await algodClient.getTransactionParams().do();
-
-    //   // Application call transaction (assuming the contract is already deployed)
-    //   const appID = 123456; // Replace with your app ID
-    //   const senderAddress = 'your-address'; // Replace with your address
-    //   const privateKey = new Uint8Array([]); // Replace with your private key as Uint8Array
-
-    //   const appArgs = [
-    //     new Uint8Array(Buffer.from('registerLand')),
-    //     algosdk.encodeUint64(Number(userID)),
-    //     algosdk.encodeUint64(Number(landID)),
-    //     algosdk.encodeUint64(Number(titleDeedID))
-    //   ];
-
-    //   const txn = algosdk.makeApplicationNoOpTxn(senderAddress, params, appID, appArgs);
-
-    //   // Sign the transaction
-    //   const signedTxn = txn.signTxn(privateKey);
-
-    //   // Send the transaction
-    //   const { txId } = await algodClient.sendRawTransaction(signedTxn).do();
-    //   console.log('Transaction sent with ID:', txId);
-
-    //   setMessage('Registration Successful');
-    // } catch (error) {
-    //   console.error('Error submitting transaction:', error);
-    //   setMessage('Registration Failed');
-    // }
-  };
-
   return (
     <div style={{display: "flex", paddingTop: "50px"}}>
         <div style={{ width: "50%", paddingLeft: "100px", paddingRight: '0px'}}>
