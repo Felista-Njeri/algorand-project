@@ -60,7 +60,6 @@ export default function App() {
         <Navigation />
         <LandingPage />
         <LandRegistration />
-        <LandVerification />
         <Footer />
       </WalletProvider>
     </SnackbarProvider>

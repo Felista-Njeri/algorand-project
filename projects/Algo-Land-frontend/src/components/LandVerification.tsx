@@ -11,7 +11,7 @@ export default function LandVerification () {
                }}>Land Verification
             </h1>
         <p style={{ color: '#444', fontSize: '1.2em', margin: '30px 0' }}>
-              Verify your land to ensure it blongs to its legitimate owner
+              Verify your land to ensure it belongs to its legitimate owner
         </p>
       </div>
      <div style={{paddingTop: "100px",width: "50%"}}>
@@ -39,11 +39,11 @@ export default function LandVerification () {
             /> <br /><br />
             <button
                 type="submit"
-                style={{ height: '45px', width: '150px', backgroundColor: "#7878ec", color: "white", borderRadius: "8px", fontWeight: "bold" }}>
+                style={{ height: '45px', width: '150px', backgroundColor: "#7878ec", borderRadius: "8px", color: 'white', fontWeight: "bold", cursor: 'pointer' }}>
                 Submit
             </button>
         </form>
       </div>
-</div>
+    </div>
   )
 }
